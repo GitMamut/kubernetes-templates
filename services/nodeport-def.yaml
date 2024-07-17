@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport-service
+
+spec:
+  type: NodePort
+  ports: # service spans between all nodes in the cluster, traffic distribution algorithm between pods is random
+    - port: 80 # service port
+      targetPort: 80 # port exposed on the pod, if not specified, will be the same as 'port'
+      nodePort: 30008 # port under which the service is exposed from the cluster, if not specified, will be assigned from range 30k - 32767
+  selector:
+    app: nginx
+  
