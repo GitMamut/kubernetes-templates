@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  containers:
+    - name: postgres
+      image: postgres
+      env:
+        - name: POSTGRES_PASSWORD
+          value: 1!posrtgrespass
+
+# check if postgres works in pod
+# expose it through a service and check if it works
+# deploy postgres in Deployment (or StatefulSet)
+# check what storage classes does minikube have
+# add persistant volume object to your kubernetes
+# add persistant volume claim to the deployment (or StatefulSet) with postgres 
