@@ -4,7 +4,7 @@ metadata:
   name: nginx-clusterip-service
 
 spec:
-  type: ClusterIP # this service is not ment to be exposed externally, but can be used to communicate within the cluster
+  type: ClusterIP # this service is not ment to be exposed externally, but can be used to communicate within the cluster, through service name (see line 4)
   ports:
     - port: 80 # service port
       targetPort: 80 # port exposed on the pod  

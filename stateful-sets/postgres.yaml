@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+# StatefulSet creates and destroys 'deployments' one by one, with consecutive numbers instead of random identifiers, tries to always keep the oldest ones.
+# It is used for creating distributed implementations, like PostgreSQL or Redis clusters, where apps need to precisely control its instances
+metadata:
+  name: postgres-statefulset
+  labels:
+    app: postgres-cluster
+
+spec:
+  selector:
+    matchLabels:
+      app: postgres-cluster
+  replicas: 1
+ 
+  serviceName: postgres-headless-service # StatefulSet requires a headless service
+
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        app: postgres-cluster
+    spec:
+      containers:
+      - name: postgres
+        image: postgres
+        ports:
+          - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            value: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-headless
+spec:
+  clusterIP: None
+  ports:
+  - port: 5432
+    targetPort: 5432
+    name: server
+  selector:
+    app: postgres-cluster

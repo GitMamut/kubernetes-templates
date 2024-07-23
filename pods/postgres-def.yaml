@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: postgres-pod
   labels:
-    app: postgres-pod
+    app: postgres
 spec:
   containers:
     - name: postgres
@@ -16,7 +16,7 @@ spec:
 
 # v check if postgres works in pod
 # v expose it through a service and check if it works
-# deploy postgres in Deployment (or StatefulSet)
+# v deploy postgres in Deployment (or StatefulSet)
 # check what storage classes does minikube have
 # add persistant volume object to your kubernetes
 # add persistant volume claim to the deployment (or StatefulSet) with postgres 

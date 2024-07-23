@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service # this name can be used to reach the service within the cluster, it is provided by kubernetes DNS
+  name: postgres-clusterip # this name can be used to reach the service within the cluster, it is provided by kubernetes DNS
 
 spec:
   type: ClusterIP # this service is not ment to be exposed externally, but can be used to communicate within the cluster
@@ -9,4 +9,4 @@ spec:
     - port: 5432 # service port
       targetPort: 5432 # port exposed on the pod  
   selector:
-    app: postgres-pod
+    app: postgres
