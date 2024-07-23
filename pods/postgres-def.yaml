@@ -1,19 +1,21 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: postgres
+  name: postgres-pod
   labels:
-    app: postgres
+    app: postgres-pod
 spec:
   containers:
     - name: postgres
       image: postgres
+      ports:
+        - containerPort: 5432
       env:
         - name: POSTGRES_PASSWORD
-          value: 1!posrtgrespass
+          value: postgres
 
-# check if postgres works in pod
-# expose it through a service and check if it works
+# v check if postgres works in pod
+# v expose it through a service and check if it works
 # deploy postgres in Deployment (or StatefulSet)
 # check what storage classes does minikube have
 # add persistant volume object to your kubernetes
