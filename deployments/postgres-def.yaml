@@ -16,6 +16,7 @@ spec:
       name: postgres-pod
       labels:
         app: postgres
+    
     spec:
       containers:
       - name: postgres
@@ -25,3 +26,11 @@ spec:
         env:
           - name: POSTGRES_PASSWORD
             value: postgres
+        volumeMounts:
+          - name: postgres-data
+            mountPath: /var/lib/postgresql/data
+      
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-persistent-volume-claim # the PV claim is defined in separate file in /storage directory
